@@ -82,6 +82,13 @@ class ServiceProvider extends BaseServiceProvider
     ];
 
     /**
+     * @var array
+     */
+    protected $asyncProcessingCommands = [
+        Commands\MakeQueueJobsTableCommand::class
+    ];
+
+    /**
      * @param Router $router
      * @param ResponseFactoryContract $responses
      */
@@ -282,6 +289,7 @@ class ServiceProvider extends BaseServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands($this->generatorCommands);
+            $this->commands($this->asyncProcessingCommands);
         }
     }
 
